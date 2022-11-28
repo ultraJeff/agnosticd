@@ -45,8 +45,8 @@
         - name: Save user data
           agnosticd_user_info:
             data:
-              ssh_command: "ssh {{ lab_user }}@bastion.{{ guid }}.{{ osp_cluster_dns_zone }}"
-              ssh_password: "{{ hostvars['bastion']['student_password'] }}"
+           #  ssh_command: "ssh {{ lab_user }}@bastion.{{ guid }}.{{ osp_cluster_dns_zone }}"
+           #  ssh_password: "{{ hostvars['bastion']['student_password'] }}"
               frontend_url: "http://frontend.{{ guid }}.{{ osp_cluster_dns_zone }}"
 
     - name: ec2 user.info
@@ -65,8 +65,9 @@
         - name: Save user data
           agnosticd_user_info:
             data:
-              ssh_command: "ssh {{ lab_user }}@bastion.{{ guid }}{{ subdomain_base_suffix }}"
-              ssh_password: "{{ hostvars[groups['bastions'][0]]['student_password'] }}"
+             # ssh_command: "ssh {{ lab_user }}@bastion.{{ guid }}{{ subdomain_base_suffix }}"
+             # ssh_password: "{{ hostvars[groups['bastions'][0]]['student_password'] }}"
+             frontend_url: "http://frontend.{{ guid }}.{{ osp_cluster_dns_zone }}"
 
 
 - name: PostSoftware flight-check
