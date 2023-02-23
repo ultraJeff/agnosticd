@@ -1,0 +1,1 @@
+rosa_user: "{{ ansible_user }}" # or {{ lab_user }} or {{ student_name }}
