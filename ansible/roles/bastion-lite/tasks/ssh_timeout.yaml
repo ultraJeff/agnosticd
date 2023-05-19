@@ -1,0 +1,27 @@
+- name: Extend ssh timeouts - primirly for bookbag users
+  when: bastion_extend_ssh_timeout | default(true) | bool
+  become: true
+  block:
+
+    - name: Set ClientAliveInterval
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?ClientAliveInterval'
+        line: 'ClientAliveInterval 0'
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Set ClientAliveCountMax
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?ClientAliveCountMax'
+        line: 'ClientAliveCountMax 0'
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Restart sshd service
+      ansible.builtin.systemd:
+        name: sshd
+        state: restarted
